@@ -7,7 +7,7 @@ class VoltnetConan(ConanFile):
     license = "GPL3"
     author = "Ovidiu Opris opris.ovidiu@gmail.com"
     url = "https://www.github.com/SirHall/volt_net_conan"
-    requires = "volt_event/0.0.1@volt/dev"
+    requires = ["volt_event/0.0.1@volt/dev", "boost/1.71.0@conan/stable"]
     description = "Library that handles network connections"
     topics = ("C++", "Networking", "Crossplatform")
     settings = "os", "compiler", "build_type", "arch"
