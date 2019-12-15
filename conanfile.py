@@ -14,6 +14,7 @@ class VoltnetConan(ConanFile):
     options = {"shared": [True, False]}
     default_options = {"shared": False}
     generators = "cmake"
+    exports_sources = "include/**"
 
     def source(self):
         git = tools.Git(folder="volt_net")
@@ -38,12 +39,16 @@ conan_basic_setup()''')
         # self.run("cmake --build . %s" % cmake.build_config)
 
     def package(self):
-        self.copy("*.h", dst="include", src="hello")
-        self.copy("*hello.lib", dst="lib", keep_path=False)
+        self.copy("*.h", dst="include/",
+                  src="volt_net/volt_net/include/", keep_path=True)
+        self.copy("*.hpp", dst="include/",
+                  src="volt_net/volt_net/include", keep_path=True)
+        self.copy("*.lib", dst="lib", keep_path=False)
+        self.copy("libvolt_net.a", dst="lib", keep_path=False)
         self.copy("*.dll", dst="bin", keep_path=False)
         self.copy("*.so", dst="lib", keep_path=False)
         self.copy("*.dylib", dst="lib", keep_path=False)
         self.copy("*.a", dst="lib", keep_path=False)
 
-    # def package_info(self):
-    #     self.cpp_info.libs = ["hello"]
+    def package_info(self):
+        self.cpp_info.libs = ["volt_net"]
